@@ -46,15 +46,15 @@ class MainActivity : AppCompatActivity() {
         totalCardListForThree.shuffle()
         //Log.d("test",totalCardList.toString())
 
-
-        val marginSpace : Int = -50
-        val spaceSet = MarginSetDecoration(marginSpace)
+        val spaceSet = MarginSetDecoration()
+        val bottomSpaceSet = MarginSetBottomDecoration()
 
         binding.aCardListView.addItemDecoration(spaceSet)
         binding.bCardListView.addItemDecoration(spaceSet)
         binding.cCardListView.addItemDecoration(spaceSet)
         binding.dCardListView.addItemDecoration(spaceSet)
         binding.eCardListView.addItemDecoration(spaceSet)
+        binding.bottomCardListView.addItemDecoration(bottomSpaceSet)
 
 
         // selector 사용 해보기

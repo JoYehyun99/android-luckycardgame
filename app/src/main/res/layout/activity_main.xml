@@ -70,7 +70,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/a_card_listView"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center" />
 
                 </androidx.cardview.widget.CardView>
@@ -90,7 +90,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/b_card_listView"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center" />
 
                 </androidx.cardview.widget.CardView>
@@ -110,7 +110,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/c_card_listView"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center" />
 
                 </androidx.cardview.widget.CardView>
@@ -130,7 +130,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/d_card_listView"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -153,7 +153,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/e_card_listView"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center">
 
                     </androidx.recyclerview.widget.RecyclerView>

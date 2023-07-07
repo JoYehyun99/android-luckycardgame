@@ -100,19 +100,15 @@ class MainActivity : AppCompatActivity() {
 
             val sharedCardList = totalCardListForThree.chunked(participantCardCnt)
             for (i in 0 until totalParticipants) {
-                totalParticipantList.add(Participant(sharedCardList[i].toMutableList()))
+                totalParticipantList.add(Participant(i,sharedCardList[i].toMutableList()))
             }
             bottomStageCardList.addAll(sharedCardList[totalParticipants])
             bottomStageCardList.addAll(sharedCardList[totalParticipants + 1])
-
-            Log.d("participant", totalParticipantList[0].ownCardList.toString())
-            Log.d("test", bottomStageCardList.toString())
 
             val aAdapter = CardListAdapter(totalParticipantList[0].ownCardList, false)
             val bAdapter = CardListAdapter(totalParticipantList[1].ownCardList, true)
             val cAdapter = CardListAdapter(totalParticipantList[2].ownCardList, true)
             val bottomAdapter = CardListAdapter(bottomStageCardList, true)
-            //bottomAdapter.notifyDataSetChanged()
 
             binding.aCardListView.adapter = aAdapter
             binding.aCardListView.layoutManager =
@@ -150,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
             val sharedCardList = totalCardList.chunked(participantCardCnt)
             for (i in 0 until totalParticipants) {
-                totalParticipantList.add(Participant(sharedCardList[i].toMutableList()))
+                totalParticipantList.add(Participant(i,sharedCardList[i].toMutableList()))
             }
             bottomStageCardList.addAll(sharedCardList[totalParticipants])
             bottomStageCardList.addAll(sharedCardList[totalParticipants + 1])
@@ -200,7 +196,7 @@ class MainActivity : AppCompatActivity() {
 
             val sharedCardList = totalCardList.chunked(participantCardCnt)
             for (i in 0 until totalParticipants) {
-                totalParticipantList.add(Participant(sharedCardList[i].toMutableList()))
+                totalParticipantList.add(Participant(i,sharedCardList[i].toMutableList()))
             }
             bottomStageCardList.addAll(sharedCardList[totalParticipants])
 

@@ -1,14 +1,14 @@
 # android-luckycardgame
-##### 참가자 클래스 ( Participant )
+#### 참가자 클래스 ( Participant )
 - 참가자 별 소유하는 카드 리스트 저장
 
-##### RecyclerView를 사용하여 카드 리스트 UI 구현
+#### RecyclerView를 사용하여 카드 리스트 UI 구현
 
-- 카드 앞면 / 뒷면 구분
+- **카드 앞면 / 뒷면 구분**
 
 Adapter에 뒷면을 표시할 것인가에 대한 Boolean 값(isBackSide)을 전달하여 자신의 카드 외에는 카드 뒷면이 보일 수 있도록 설정
 
-- 카드 간격 설정
+- **카드 간격 설정**
 RecyclerView의 ItemDecoration 활용하여 카드 간의 간격 설정. 
 
 참가자 카드와 바닥 카드 리스트 UI가 다르기 때문에 두 개의 Decoration class 생성하여 사용. (MarginSetDecoration / MarginSetBottomDecoration) 

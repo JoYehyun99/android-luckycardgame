@@ -48,21 +48,21 @@ private fun printItem(item: Card) {
         is Card.Dog -> print(
             String.format(
                 "${String(Character.toChars(Animal.DOG.unicode))}%02d",
-                item.num
+                item.cardNum
             )
         )
 
         is Card.Cat -> print(
             String.format(
                 "${String(Character.toChars(Animal.CAT.unicode))}%02d",
-                item.num
+                item.cardNum
             )
         )
 
         is Card.Cow -> print(
             String.format(
                 "${String(Character.toChars(Animal.COW.unicode))}%02d",
-                item.num
+                item.cardNum
             )
         )
     }

@@ -8,5 +8,4 @@ class LuckyCardTest {
 
     private val luckyCardGame = LuckyGame()
 
-
 }

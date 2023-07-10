@@ -1,6 +1,5 @@
 package com.example.luckycardgame
 
-import android.util.Log
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
@@ -14,7 +13,7 @@ class LuckyCardTest {
         luckyGame.setParticipantsNumbers(3) // 게임 인원을 3명으로 임의로 설정
     }
     @Test
-    fun checkInitialSetting_countEachAnimalCardSet() {
+    fun initialSetting_countAnimalCards_eachHas12Cards() {
 
         val groupByAnimal = luckyGame.totalCardList.groupBy { card ->
             when (card) {
@@ -30,7 +29,7 @@ class LuckyCardTest {
         assertArrayEquals(answer, groupByAnimal.values.toTypedArray())
     }
     @Test
-    fun checkInitialSetting_countAnimalCardSet_for3People() {
+    fun initialSetting_countAnimalCardsFor3People_NoNumber12() {
 
         val cardSet = luckyGame.totalCardListForThree
         assertTrue(cardSet.all { it.cardNum < 12 })
@@ -63,7 +62,7 @@ class LuckyCardTest {
 
     }
     @Test
-    fun sortCard_byParticipant_ascendingOrder() {
+    fun sortCard_byParticipant_inAscendingOrder() {
 
         val userId = 1
         luckyGame.sortCardByNum(userId)
@@ -75,7 +74,7 @@ class LuckyCardTest {
 
     }
     @Test
-    fun sortCard_bottom_ascendingOrder() {
+    fun sortCard_bottom_inAscendingOrder() {
 
         luckyGame.sortBottomCardByNum()
         val testCardList = luckyGame.bottomCardList.zipWithNext { card1, card2 ->
@@ -84,19 +83,17 @@ class LuckyCardTest {
         assertTrue(testCardList)
     }
     @Test
-    fun findParticipant_WhoHasSameThreeCard() {
+    fun findParticipant_WhoHasSameThreeCard_whoAndWhatNumbers() {
 
         val result = luckyGame.findWhoHasSameThreeCard()
-        if (result.isNotEmpty()) {
-            result.forEach { (participant, cardNums) ->
-                val tmp = participant.ownCardList.filter { card -> cardNums.contains(card.cardNum) }
-                assertTrue(tmp.size % 3 == 0)
-            }
+        result.forEach { (participant, cardNums) ->
+            val tmp = participant.ownCardList.filter { card -> cardNums.contains(card.cardNum) }
+            assertTrue(tmp.size % 3 == 0)
         }
 
     }
     @Test
-    fun compareThreeCards_twoParticipantsAndBottom_true() {
+    fun compareThreeCards_twoParticipantsAndBottom_isTrue() {
 
         val user1 = 1
         val user2 = 2

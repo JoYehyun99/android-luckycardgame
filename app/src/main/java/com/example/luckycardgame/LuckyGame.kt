@@ -10,7 +10,6 @@ class LuckyGame {
     var bottomCardList: MutableList<Card> = mutableListOf()
 
     init {
-
         for (i in 1..12) {
             totalCardList.add(Card.Dog(i))
             if (i != 12) {
@@ -29,26 +28,21 @@ class LuckyGame {
                 totalCardListForThree.add(Card.Cow(i))
             }
         }
-
         totalCardListForThree.shuffle()
         totalCardList.shuffle()
-
     }
 
     fun setParticipantsNumbers(num: Int) {
         participantsCnt = num
-
         // 참여자 인원에 맞게 카드 배분
         if (num == 3) {
             shareCardToThreePP()
         } else {
             shareCardToFourOrFivePP(num)
         }
-
     }
 
     fun shareCardToThreePP() {
-
         participantCardCnt = 8
         val sharedCardList = totalCardListForThree.chunked(participantCardCnt)
         val tmpList: MutableList<Participant> = mutableListOf()
@@ -57,11 +51,9 @@ class LuckyGame {
         }
         participantsList = tmpList
         shareBottomCard(sharedCardList)
-
     }
 
     fun shareCardToFourOrFivePP(num: Int) {
-
         if (num == 4) {
             participantCardCnt = 7
         } else {
@@ -74,7 +66,6 @@ class LuckyGame {
         }
         participantsList = tmpList
         shareBottomCard(sharedCardList)
-
     }
 
     fun shareBottomCard(sharedCardList: List<List<Card>>) {
@@ -85,12 +76,10 @@ class LuckyGame {
             tmpList.addAll(sharedCardList[participantsCnt + 1])
         }
         bottomCardList = tmpList
-
     }
 
     fun sortCardByNum(id: Int): MutableList<Card>? {
-
-        var user: Participant? = participantsList.find { participant -> participant.id == id }
+        val user = participantsList.find { participant -> participant.id == id }
         if (user != null) {
             user.ownCardList.sortBy { it.cardNum }
             return user.ownCardList
@@ -99,12 +88,9 @@ class LuckyGame {
     }
 
     fun sortBottomCardByNum(): MutableList<Card> {
-
         bottomCardList.sortBy { it.cardNum }
         return bottomCardList
-
     }
-
 
     fun findWhoHasSameThreeCard(): Map<Participant, List<Int>> {
 
@@ -150,7 +136,6 @@ class LuckyGame {
         }
 
         return -1
-
     }
 
 }

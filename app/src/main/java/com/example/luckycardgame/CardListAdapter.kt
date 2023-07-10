@@ -38,20 +38,20 @@ class CardListAdapter(private val cardList: MutableList<Card>, private val isBac
             val cardItem = cardList[position]
             when (cardList[position]) {
                 is Card.Dog -> {
-                    holder.topNum.text = (cardItem as Card.Dog).num.toString()
-                    holder.bottomNum.text = cardItem.num.toString()
+                    holder.topNum.text = (cardItem as Card.Dog).cardNum.toString()
+                    holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = String(Character.toChars(cardItem.unicode))
                 }
 
                 is Card.Cat -> {
-                    holder.topNum.text = (cardItem as Card.Cat).num.toString()
-                    holder.bottomNum.text = cardItem.num.toString()
+                    holder.topNum.text = (cardItem as Card.Cat).cardNum.toString()
+                    holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = String(Character.toChars(cardItem.unicode))
                 }
 
                 is Card.Cow -> {
-                    holder.topNum.text = (cardItem as Card.Cow).num.toString()
-                    holder.bottomNum.text = cardItem.num.toString()
+                    holder.topNum.text = (cardItem as Card.Cow).cardNum.toString()
+                    holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = String(Character.toChars(cardItem.unicode))
                 }
 

@@ -5,8 +5,8 @@ class LuckyGame {
     var participantsCnt = 3
     var participantCardCnt = 8
     var participantsList: MutableList<Participant> = mutableListOf()
-    private val totalCardList: MutableList<Card> = mutableListOf()
-    private val totalCardListForThree: MutableList<Card> = mutableListOf()
+    val totalCardList: MutableList<Card> = mutableListOf()
+    val totalCardListForThree: MutableList<Card> = mutableListOf()
     var bottomCardList: MutableList<Card> = mutableListOf()
 
     init {
@@ -56,6 +56,7 @@ class LuckyGame {
             tmpList.add(Participant(i, sharedCardList[i].toMutableList()))
         }
         participantsList = tmpList
+        shareBottomCard(sharedCardList)
 
     }
 
@@ -72,6 +73,8 @@ class LuckyGame {
             tmpList.add(Participant(i, sharedCardList[i].toMutableList()))
         }
         participantsList = tmpList
+        shareBottomCard(sharedCardList)
+
     }
 
     fun shareBottomCard(sharedCardList: List<List<Card>>) {
@@ -103,41 +106,50 @@ class LuckyGame {
     }
 
 
-    fun findWhoHaveSameThreeCard(): List<Int> {
+    fun findWhoHasSameThreeCard(): Map<Participant, List<Int>> {
 
-        val result: MutableList<Int> = mutableListOf()
+        val result: MutableMap<Participant, List<Int>> = mutableMapOf()
+
         participantsList.forEach { participant ->
-            val tmp = participant.ownCardList.groupingBy { it.cardNum }.eachCount()
-                .count { it.value == 3 }
-            if (tmp > 0) {
-                result.add(participant.id)
+            val cardCnt = participant.ownCardList.groupingBy { it.cardNum }.eachCount()
+            val sameThreeCardNums = cardCnt.filter { it.value == 3 }.keys.toList()
+
+            if (sameThreeCardNums.isNotEmpty()) {
+                result[participant] = sameThreeCardNums
             }
         }
         return result
     }
 
-    fun compareThreeCards(firstUserId : Int, secondUserId : Int) : Boolean{
+    fun compareThreeCards(
+        firstUserId: Int,
+        secondUserId: Int,
+        bottomCardNum: Int = bottomCardList.random().cardNum
+    ): Int {
 
         val firstUser = participantsList[firstUserId]
         val secondUser = participantsList[secondUserId]
-        val bottomCardNum = bottomCardList.random().cardNum
 
         // 최소값 카드
-        val firstUserMinCardNum = firstUser.ownCardList.minWith(Comparator.comparingInt{it.cardNum}).cardNum
-        val secondUserMinCardNum = secondUser.ownCardList.minWith(Comparator.comparingInt{it.cardNum}).cardNum
-        if(firstUserMinCardNum== secondUserMinCardNum){
-            if(bottomCardNum == firstUserMinCardNum) return true
+        val firstUserMinCardNum =
+            firstUser.ownCardList.minWith(Comparator.comparingInt { it.cardNum }).cardNum
+        val secondUserMinCardNum =
+            secondUser.ownCardList.minWith(Comparator.comparingInt { it.cardNum }).cardNum
+        if (firstUserMinCardNum == secondUserMinCardNum) {
+            if (bottomCardNum == firstUserMinCardNum) return bottomCardNum
         }
 
         // 최대값 카드
-        val firstUserMaxCardNum = firstUser.ownCardList.maxWith(Comparator.comparingInt{it.cardNum}).cardNum
-        val secondUserMaxCardNum = secondUser.ownCardList.maxWith(Comparator.comparingInt{it.cardNum}).cardNum
+        val firstUserMaxCardNum =
+            firstUser.ownCardList.maxWith(Comparator.comparingInt { it.cardNum }).cardNum
+        val secondUserMaxCardNum =
+            secondUser.ownCardList.maxWith(Comparator.comparingInt { it.cardNum }).cardNum
 
-        if(firstUserMaxCardNum== secondUserMaxCardNum){
-            if(bottomCardNum == firstUserMaxCardNum) return true
+        if (firstUserMaxCardNum == secondUserMaxCardNum) {
+            if (bottomCardNum == firstUserMaxCardNum) return bottomCardNum
         }
 
-        return false
+        return -1
 
     }
 

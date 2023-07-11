@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CardListAdapter(private val cardList: MutableList<Card>, private val isBackSide: Boolean) :
+class CardListAdapter(private val cardList: MutableList<Card>) :
     RecyclerView.Adapter<CardListAdapter.CardListViewHolder>() {
 
     inner class CardListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,7 +28,7 @@ class CardListAdapter(private val cardList: MutableList<Card>, private val isBac
 
     override fun onBindViewHolder(holder: CardListViewHolder, position: Int) {
 
-        if (isBackSide) {
+        if (cardList[position].flipped) {
             holder.topNum.visibility = View.INVISIBLE
             holder.bottomNum.visibility = View.INVISIBLE
             holder.animalImg.visibility = View.INVISIBLE

@@ -34,12 +34,17 @@ class LuckyGame {
 
     fun setParticipantsNumbers(num: Int) {
         participantsCnt = num
-        // 참여자 인원에 맞게 카드 배분
         if (num == 3) {
             shareCardToThreePP()
         } else {
             shareCardToFourOrFivePP(num)
         }
+
+        // 각각 오름차순 정렬로 초기화
+        for (i in 0 until participantsCnt) {
+            sortCardByNum(i)
+        }
+        sortBottomCardByNum()
     }
 
     fun shareCardToThreePP() {
@@ -116,7 +121,6 @@ class LuckyGame {
         val firstUser = participantsList[firstUserId]
         val secondUser = participantsList[secondUserId]
 
-        // 최소값 카드
         val firstUserMinCardNum =
             firstUser.ownCardList.minWith(Comparator.comparingInt { it.cardNum }).cardNum
         val secondUserMinCardNum =
@@ -125,7 +129,6 @@ class LuckyGame {
             if (bottomCardNum == firstUserMinCardNum) return bottomCardNum
         }
 
-        // 최대값 카드
         val firstUserMaxCardNum =
             firstUser.ownCardList.maxWith(Comparator.comparingInt { it.cardNum }).cardNum
         val secondUserMaxCardNum =
@@ -138,4 +141,19 @@ class LuckyGame {
         return -1
     }
 
+    fun flipCard(userId: Int, pos: Int) : Boolean {
+
+        val userCardList = participantsList[userId].ownCardList
+
+        if(!userCardList[pos].flipped) return false
+        return if (pos == 0 || pos == (participantCardCnt - 1)) {
+            userCardList[pos].flipped = false
+            true
+        } else if (!userCardList[pos - 1].flipped || !userCardList[pos + 1].flipped){
+            userCardList[pos].flipped = false
+            true
+        } else{
+            false
+        }
+    }
 }

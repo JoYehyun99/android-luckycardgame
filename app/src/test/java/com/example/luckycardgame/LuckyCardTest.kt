@@ -14,7 +14,6 @@ class LuckyCardTest {
     }
     @Test
     fun initialSetting_countAnimalCards_eachHas12Cards() {
-
         val groupByAnimal = luckyGame.totalCardList.groupBy { card ->
             when (card) {
                 is Card.Dog -> "Dog"
@@ -25,19 +24,15 @@ class LuckyCardTest {
             animalCards.size
         }
         val answer = arrayOf(12, 12, 12)
-
         assertArrayEquals(answer, groupByAnimal.values.toTypedArray())
     }
     @Test
     fun initialSetting_countAnimalCardsFor3People_NoNumber12() {
-
         val cardSet = luckyGame.totalCardListForThree
         assertTrue(cardSet.all { it.cardNum < 12 })
-
     }
     @Test
     fun shareCard_toParticipants_properly() {
-
         luckyGame.setParticipantsNumbers(3)
         assertEquals(8, luckyGame.participantsList[0].ownCardList.size)
 
@@ -46,11 +41,9 @@ class LuckyCardTest {
 
         luckyGame.setParticipantsNumbers(5)
         assertEquals(6, luckyGame.participantsList[0].ownCardList.size)
-
     }
     @Test
     fun shareCard_toBottom_properly() {
-
         luckyGame.setParticipantsNumbers(3)
         assertEquals(9, luckyGame.bottomCardList.size)
 
@@ -59,11 +52,9 @@ class LuckyCardTest {
 
         luckyGame.setParticipantsNumbers(5)
         assertEquals(6, luckyGame.bottomCardList.size)
-
     }
     @Test
     fun sortCard_byParticipant_inAscendingOrder() {
-
         val userId = 1
         luckyGame.sortCardByNum(userId)
         val userCardList = luckyGame.participantsList[userId].ownCardList
@@ -71,11 +62,9 @@ class LuckyCardTest {
             card1.cardNum <= card2.cardNum
         }.all { it }
         assertTrue(testCardList)
-
     }
     @Test
     fun sortCard_bottom_inAscendingOrder() {
-
         luckyGame.sortBottomCardByNum()
         val testCardList = luckyGame.bottomCardList.zipWithNext { card1, card2 ->
             card1.cardNum <= card2.cardNum
@@ -84,13 +73,11 @@ class LuckyCardTest {
     }
     @Test
     fun findParticipant_WhoHasSameThreeCard_whoAndWhatNumbers() {
-
         val result = luckyGame.findWhoHasSameThreeCard()
         result.forEach { (participant, cardNums) ->
             val tmp = participant.ownCardList.filter { card -> cardNums.contains(card.cardNum) }
             assertTrue(tmp.size % 3 == 0)
         }
-
     }
     @Test
     fun compareThreeCards_twoParticipantsAndBottom_isTrue() {
@@ -98,7 +85,6 @@ class LuckyCardTest {
         val user1 = 1
         val user2 = 2
         val bottomCardNum = luckyGame.bottomCardList.random().cardNum
-
         val result = luckyGame.compareThreeCards(user1, user2, bottomCardNum)
 
         if (result != -1) {
@@ -108,6 +94,32 @@ class LuckyCardTest {
         } else {
             assertFalse(luckyGame.participantsList[user1].ownCardList.all { card -> card.cardNum == bottomCardNum })
             assertFalse(luckyGame.participantsList[user2].ownCardList.all { card -> card.cardNum == bottomCardNum })
+        }
+    }
+
+    @Test
+    fun flipCard_BothEndsCard_returnTrue(){
+        val user = 1
+        val left = 0
+        val right = luckyGame.participantCardCnt - 1
+
+        assertTrue(luckyGame.flipCard(user, left))
+        assertTrue(luckyGame.flipCard(user, right))
+    }
+
+    @Test
+    fun flipCard_middleCards_returnFalse(){
+        val user = 1
+        val position = 2
+
+        assertFalse(luckyGame.flipCard(user,position))
+    }
+
+    @Test
+    fun flipCard_flipCardsConsecutively_returnTrue(){
+        val user = 1
+        for (i in 0..1){
+            assertTrue(luckyGame.flipCard(user,i))
         }
     }
 

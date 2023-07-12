@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luckycardgame.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         val totalCardList: MutableList<Card> = mutableListOf()
         val totalCardListForThree: MutableList<Card> = mutableListOf()
 
-
-        // 전체 카드 리스트 생성 후 shuffle
         for (i in 1..12) {
             totalCardList.add(Card.Dog(i))
             if (i != 12) {
@@ -55,8 +52,6 @@ class MainActivity : AppCompatActivity() {
         binding.eCardListView.addItemDecoration(spaceSet)
         binding.bottomCardListView.addItemDecoration(bottomSpaceSet)
 
-
-        // selector 사용 해보기
         binding.peopleBtns.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
@@ -66,21 +61,18 @@ class MainActivity : AppCompatActivity() {
                         binding.people4Btn.icon = null
                         binding.people5Btn.icon = null
                     }
-
                     R.id.people4_Btn -> {
                         binding.people3Btn.icon = null
                         binding.people4Btn.icon =
                             AppCompatResources.getDrawable(applicationContext, R.drawable.checkicon)
                         binding.people5Btn.icon = null
                     }
-
                     R.id.people5_Btn -> {
                         binding.people3Btn.icon = null
                         binding.people4Btn.icon = null
                         binding.people5Btn.icon =
                             AppCompatResources.getDrawable(applicationContext, R.drawable.checkicon)
                     }
-
                 }
             }
 
@@ -112,27 +104,22 @@ class MainActivity : AppCompatActivity() {
             val bAdapter = CardListAdapter(totalParticipantList[1].ownCardList, true)
             val cAdapter = CardListAdapter(totalParticipantList[2].ownCardList, true)
             val bottomAdapter = CardListAdapter(bottomStageCardList, true)
-            //bottomAdapter.notifyDataSetChanged()
 
             binding.aCardListView.adapter = aAdapter
             binding.aCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
             binding.bCardListView.adapter = bAdapter
             binding.bCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
 
             binding.cCardListView.adapter = cAdapter
             binding.cCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
             binding.bottomCardListView.adapter = bottomAdapter
             binding.bottomCardListView.layoutManager =
                 GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
-
         }
 
         // 4명 버튼 클릭
@@ -145,7 +132,6 @@ class MainActivity : AppCompatActivity() {
 
             totalParticipants = 4
             participantCardCnt = 7
-
             totalCardList.shuffle()
 
             val sharedCardList = totalCardList.chunked(participantCardCnt)
@@ -161,11 +147,9 @@ class MainActivity : AppCompatActivity() {
             val dAdapter = CardListAdapter(totalParticipantList[3].ownCardList, true)
             val bottomAdapter = CardListAdapter(bottomStageCardList, true)
 
-
             binding.aCardListView.adapter = aAdapter
             binding.aCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
 
             binding.bCardListView.adapter = bAdapter
             binding.bCardListView.layoutManager =
@@ -182,7 +166,6 @@ class MainActivity : AppCompatActivity() {
             binding.bottomCardListView.adapter = bottomAdapter
             binding.bottomCardListView.layoutManager =
                 GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
-
         }
 
         // 5명 버튼 클릭
@@ -211,11 +194,9 @@ class MainActivity : AppCompatActivity() {
             val eAdapter = CardListAdapter(totalParticipantList[4].ownCardList, true)
             val bottomAdapter = CardListAdapter(bottomStageCardList, true)
 
-
             binding.aCardListView.adapter = aAdapter
             binding.aCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
 
             binding.bCardListView.adapter = bAdapter
             binding.bCardListView.layoutManager =
@@ -236,10 +217,6 @@ class MainActivity : AppCompatActivity() {
             binding.bottomCardListView.adapter = bottomAdapter
             binding.bottomCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-
         }
-
     }
-
 }

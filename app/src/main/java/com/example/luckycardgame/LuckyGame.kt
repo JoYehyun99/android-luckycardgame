@@ -152,7 +152,7 @@ class LuckyGame {
         val userCardList = participantsList[userId].ownCardList
 
         if(!userCardList[pos].flipped) return false
-        return if (pos == 0 || pos == (participantCardCnt - 1)) {
+        return if (pos == 0 || pos == (userCardList.size - 1)) {
             userCardList[pos].flipped = false
             true
         } else if (!userCardList[pos - 1].flipped || !userCardList[pos + 1].flipped){

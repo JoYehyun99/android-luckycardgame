@@ -36,24 +36,20 @@ class MainActivity : AppCompatActivity() {
                         binding.people4Btn.icon = null
                         binding.people5Btn.icon = null
                     }
-
                     R.id.people4_Btn -> {
                         binding.people3Btn.icon = null
                         binding.people4Btn.icon =
                             AppCompatResources.getDrawable(applicationContext, R.drawable.checkicon)
                         binding.people5Btn.icon = null
                     }
-
                     R.id.people5_Btn -> {
                         binding.people3Btn.icon = null
                         binding.people4Btn.icon = null
                         binding.people5Btn.icon =
                             AppCompatResources.getDrawable(applicationContext, R.drawable.checkicon)
                     }
-
                 }
             }
-
         }
 
         // 3명 버튼 클릭
@@ -156,7 +152,6 @@ class MainActivity : AppCompatActivity() {
             binding.bottomCardListView.adapter = bottomAdapter
             binding.bottomCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
         }
     }
 }

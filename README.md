@@ -21,5 +21,3 @@ Decoration class 내에서 카드 리스트 개수에 따라 간격을 다르게
 <img width="322" alt="1" src="https://github.com/JoYehyun99/android-luckycardgame/assets/81362348/c0a87ff9-ec58-4cb0-be54-baa36cf03152">
 <img width="308" alt="2" src="https://github.com/JoYehyun99/android-luckycardgame/assets/81362348/645fd117-bd45-4f2b-8b77-45bb6e6c308d">
 <img width="312" alt="3" src="https://github.com/JoYehyun99/android-luckycardgame/assets/81362348/71e4999c-3e77-4257-8ecd-f819c2d67e44">
-
-

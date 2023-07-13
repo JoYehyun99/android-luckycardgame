@@ -10,7 +10,8 @@ class MarginSetDecoration() : RecyclerView.ItemDecoration() {
     enum class MarginValue(val num: Int) {
         MIN(-50),
         MID(-30),
-        MAX(2)
+        NORMAL(2),
+        MAX(20)
     }
 
     override fun getItemOffsets(
@@ -28,19 +29,22 @@ class MarginSetDecoration() : RecyclerView.ItemDecoration() {
         when (cnt) {
             6 -> {
                 if (position != 0) {  // 첫 번째 아이템이 아닌 경우에만 left에 -margin 값 적용
-                    outRect.left = MarginValue.MAX.num
+                    outRect.left = MarginValue.NORMAL.num
                 }
             }
-
             7 -> {
                 if (position != 0) {
                     outRect.left = MarginValue.MID.num
                 }
             }
-
             8 -> {
                 if (position != 0) {
                     outRect.left = MarginValue.MIN.num
+                }
+            }
+            else -> {
+                if (position != 0) {  // 첫 번째 아이템이 아닌 경우에만 left에 -margin 값 적용
+                    outRect.left = MarginValue.MAX.num
                 }
             }
         }

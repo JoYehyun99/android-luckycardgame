@@ -21,7 +21,6 @@ class MarginSetBottomDecoration() : RecyclerView.ItemDecoration() {
     ) {
 
         val position = parent.getChildAdapterPosition(view)
-        // 9, 8, 6
         when (parent.adapter?.itemCount) {
             9 -> {
                 outRect.right = MarginValue.MID.num
@@ -29,15 +28,12 @@ class MarginSetBottomDecoration() : RecyclerView.ItemDecoration() {
                     outRect.top = MarginValue.TOP.num
                 }
             }
-
             8 -> {
                 outRect.right = MarginValue.MAX.num
                 if (position % 2 == 1) {
                     outRect.top = MarginValue.TOP.num
                 }
-
             }
-
             6 -> {
                 outRect.right = MarginValue.MIN.num
             }

@@ -175,8 +175,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:textColor="@color/user_text_color"
             android:text="E"
+            android:textColor="@color/user_text_color"
             android:textSize="34sp"
             android:textStyle="bold" />
 

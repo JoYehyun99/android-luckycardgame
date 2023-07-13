@@ -3,4 +3,6 @@
     <string name="option1">3명</string>
     <string name="option2">4명</string>
     <string name="option3">5명</string>
+    <string name="result_title">게임 결과</string>
+    <string name="restart_btn">재시작</string>
 </resources>

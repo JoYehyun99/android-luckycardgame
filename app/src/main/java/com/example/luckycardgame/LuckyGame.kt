@@ -14,31 +14,23 @@ class LuckyGame {
     val totalCardList: MutableList<Card> = mutableListOf()
     val totalCardListForThree: MutableList<Card> = mutableListOf()
     var bottomCardList: MutableList<Card> = mutableListOf()
-    val winnerList : MutableMap<Int, Participant> = mutableMapOf()
+    val winnerList : HashMap<Int, Int> = hashMapOf()
     var nowturn: Int = 0
     val flippedBottomCardList : MutableList<Card> = mutableListOf()
 
     init {
         for (i in 1..12) {
             totalCardList.add(Card.Dog(i))
-            if (i != 12) {
-                totalCardListForThree.add(Card.Dog(i))
-            }
-        }
-        for (i in 1..12) {
-            totalCardList.add(Card.Cat(i))
-            if (i != 12) {
-                totalCardListForThree.add(Card.Cat(i))
-            }
-        }
-        for (i in 1..12) {
             totalCardList.add(Card.Cow(i))
-            if (i != 12) {
+            totalCardList.add(Card.Cow(i))
+            if(i != 12){
+                totalCardListForThree.add(Card.Dog(i))
+                totalCardListForThree.add(Card.Cat(i))
                 totalCardListForThree.add(Card.Cow(i))
             }
         }
         totalCardListForThree.shuffle()
-        totalCardList.shuffle()
+        //totalCardList.shuffle()
     }
 
     fun setParticipantsNumbers(num: Int) {
@@ -48,7 +40,6 @@ class LuckyGame {
         } else {
             shareCardToFourOrFivePP(num)
         }
-
         // 각각 오름차순 정렬로 초기화
         for (i in 0 until participantsCnt) {
             sortCardByNum(i)
@@ -236,7 +227,7 @@ class LuckyGame {
 
             if(numList.contains(GOAL_NUM)) {
                 // 숫자 7 카드를 가지고 있는 이용자가 있는 경우
-                winnerList[GOAL_NUM] = sameCards.getValue(GOAL_NUM)
+                winnerList[GOAL_NUM] = sameCards.getValue(GOAL_NUM).id
                 return true
             } else{
                 // 7외의 숫자들만 있는 경우 -> 합/차 조합 테스트 해보기
@@ -248,7 +239,7 @@ class LuckyGame {
                     if(result != null){
                         // 승자 추가
                         result.forEach{ num ->
-                            winnerList[num] = sameCards.getValue(num)
+                            winnerList[num] = sameCards.getValue(num).id
                         }
                         return true
                     }

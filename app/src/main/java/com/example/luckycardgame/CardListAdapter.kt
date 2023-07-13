@@ -12,7 +12,7 @@ import com.example.luckycardgame.databinding.CardItemBinding
 class CardListAdapter(
     private val cardList: MutableList<Card>,
     private val userId: Int,
-    private val listener: OnCardClickListener
+    private val listener: OnCardClickListener?
 ) :
     RecyclerView.Adapter<CardListAdapter.CardListViewHolder>() {
     interface OnCardClickListener {
@@ -50,9 +50,11 @@ class CardListAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            if (cardItem.flipped) {
-                if (listener.onFlipCard(cardList[position], position, userId)) {
-                    setFrontView(cardItem, holder)
+            if(listener != null){
+                if (cardItem.flipped) {
+                    if (listener.onFlipCard(cardList[position], position, userId)) {
+                        setFrontView(cardItem, holder)
+                    }
                 }
             }
         }

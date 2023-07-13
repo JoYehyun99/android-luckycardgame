@@ -1,5 +1,6 @@
 package com.example.luckycardgame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -187,9 +188,12 @@ class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
             Handler(Looper.getMainLooper()).postDelayed({
                 if(luckyGame.isGameEnd()){
                     Toast.makeText(this, "게임 종료", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this,ResultActivity::class.java)
+                    intent.putExtra(ResultActivity.WINNER,luckyGame.winnerList)
+                    startActivity(intent)
                 }
                 else{
-                    bottomAdapter.notifyDataSetChanged()
+                    //bottomAdapter.notifyDataSetChanged()
                     cardViews[luckyGame.switchTurn()].setCardBackgroundColor(
                         ContextCompat.getColor(
                             this,

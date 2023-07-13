@@ -1,13 +1,23 @@
 package com.example.luckycardgame
 
+import android.animation.ObjectAnimator
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luckycardgame.databinding.CardItemBinding
 
-class CardListAdapter(private val cardList: MutableList<Card>) :
+class CardListAdapter(
+    private val cardList: MutableList<Card>,
+    private val userId: Int,
+    private val listener: OnCardClickListener
+) :
     RecyclerView.Adapter<CardListAdapter.CardListViewHolder>() {
+    interface OnCardClickListener {
+        fun onFlipCard(card: Card, position: Int, userId: Int): Boolean
+    }
 
     inner class CardListViewHolder(binding: CardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -28,33 +38,57 @@ class CardListAdapter(private val cardList: MutableList<Card>) :
 
     override fun onBindViewHolder(holder: CardListViewHolder, position: Int) {
 
-        if (cardList[position].flipped) {
+        val cardItem = cardList[position]
+
+        if (cardItem.flipped) {
             holder.topNum.visibility = View.INVISIBLE
             holder.bottomNum.visibility = View.INVISIBLE
             holder.animalImg.visibility = View.INVISIBLE
             holder.backsideImg.visibility = View.VISIBLE
         } else {
+            setFrontView(cardItem, holder)
+        }
+
+        holder.itemView.setOnClickListener {
+            if (cardItem.flipped) {
+                if (listener.onFlipCard(cardList[position], position, userId)) {
+                    setFrontView(cardItem, holder)
+                }
+            }
+        }
+    }
+
+    private fun setFrontView(cardItem: Card, holder: CardListViewHolder) {
+
+        val rotate = ObjectAnimator.ofFloat(holder.itemView,"rotationY",180f,0f)
+        rotate.duration = 300
+        rotate.start()
+
+        Handler(Looper.getMainLooper()).postDelayed({
             holder.backsideImg.visibility = View.INVISIBLE
-            val cardItem = cardList[position]
-            when (cardList[position]) {
+            holder.topNum.visibility = View.VISIBLE
+            holder.bottomNum.visibility = View.VISIBLE
+            holder.animalImg.visibility = View.VISIBLE
+
+            when (cardItem) {
                 is Card.Dog -> {
-                    holder.topNum.text = (cardItem as Card.Dog).cardNum.toString()
+                    holder.topNum.text = cardItem.cardNum.toString()
                     holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = cardItem.unicode
                 }
 
                 is Card.Cat -> {
-                    holder.topNum.text = (cardItem as Card.Cat).cardNum.toString()
+                    holder.topNum.text = cardItem.cardNum.toString()
                     holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = cardItem.unicode
                 }
 
                 is Card.Cow -> {
-                    holder.topNum.text = (cardItem as Card.Cow).cardNum.toString()
+                    holder.topNum.text = cardItem.cardNum.toString()
                     holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = cardItem.unicode
                 }
             }
-        }
+        },200)
     }
 }

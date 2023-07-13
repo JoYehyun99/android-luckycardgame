@@ -9,22 +9,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.luckycardgame.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
+
+    private val luckyGame = LuckyGame()
+    private val turn = mutableMapOf(0 to 3, 1 to 3, 2 to 3,3 to 3, 4 to 3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val luckyGame = LuckyGame()
         val spaceSet = MarginSetDecoration()
         val bottomSpaceSet = MarginSetBottomDecoration()
-
-        binding.aCardListView.addItemDecoration(spaceSet)
-        binding.bCardListView.addItemDecoration(spaceSet)
-        binding.cCardListView.addItemDecoration(spaceSet)
-        binding.dCardListView.addItemDecoration(spaceSet)
-        binding.eCardListView.addItemDecoration(spaceSet)
+        val views = listOf(binding.aCardListView, binding.bCardListView,binding.cCardListView,binding.dCardListView,binding.eCardListView)
+        for(view in views){
+            view.addItemDecoration((spaceSet))
+        }
         binding.bottomCardListView.addItemDecoration(bottomSpaceSet)
 
         binding.peopleBtns.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
@@ -59,26 +59,20 @@ class MainActivity : AppCompatActivity() {
 
             luckyGame.setParticipantsNumbers(3)
 
-            val aAdapter = CardListAdapter(luckyGame.participantsList[0].ownCardList)
-            val bAdapter = CardListAdapter(luckyGame.participantsList[1].ownCardList)
-            val cAdapter = CardListAdapter(luckyGame.participantsList[2].ownCardList)
-            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList)
+            val adapters : MutableList<CardListAdapter> = mutableListOf()
+            for (i in 0 until luckyGame.participantsCnt){
+                adapters.add(CardListAdapter(luckyGame.participantsList[i].ownCardList,i, this@MainActivity))
+            }
+            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList,-1,this@MainActivity)
 
-            binding.aCardListView.adapter = aAdapter
-            binding.aCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.bCardListView.adapter = bAdapter
-            binding.bCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.cCardListView.adapter = cAdapter
-            binding.cCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
+            for((view,adapter) in views.zip(adapters)){
+                view.adapter = adapter
+                view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            }
             binding.bottomCardListView.adapter = bottomAdapter
             binding.bottomCardListView.layoutManager =
                 GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
+
         }
 
         // 4명 버튼 클릭
@@ -88,28 +82,16 @@ class MainActivity : AppCompatActivity() {
 
             luckyGame.setParticipantsNumbers(4)
 
-            val aAdapter = CardListAdapter(luckyGame.participantsList[0].ownCardList)
-            val bAdapter = CardListAdapter(luckyGame.participantsList[1].ownCardList)
-            val cAdapter = CardListAdapter(luckyGame.participantsList[2].ownCardList)
-            val dAdapter = CardListAdapter(luckyGame.participantsList[3].ownCardList)
-            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList)
+            val adapters : MutableList<CardListAdapter> = mutableListOf()
+            for (i in 0 until luckyGame.participantsCnt){
+                adapters.add(CardListAdapter(luckyGame.participantsList[i].ownCardList,i, this@MainActivity))
+            }
+            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList,-1,this@MainActivity)
 
-            binding.aCardListView.adapter = aAdapter
-            binding.aCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.bCardListView.adapter = bAdapter
-            binding.bCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.cCardListView.adapter = cAdapter
-            binding.cCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.dCardListView.adapter = dAdapter
-            binding.dCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
+            for((view,adapter) in views.zip(adapters)){
+                view.adapter = adapter
+                view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            }
             binding.bottomCardListView.adapter = bottomAdapter
             binding.bottomCardListView.layoutManager =
                 GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
@@ -122,36 +104,30 @@ class MainActivity : AppCompatActivity() {
 
             luckyGame.setParticipantsNumbers(5)
 
-            val aAdapter = CardListAdapter(luckyGame.participantsList[0].ownCardList)
-            val bAdapter = CardListAdapter(luckyGame.participantsList[1].ownCardList)
-            val cAdapter = CardListAdapter(luckyGame.participantsList[2].ownCardList)
-            val dAdapter = CardListAdapter(luckyGame.participantsList[3].ownCardList)
-            val eAdapter = CardListAdapter(luckyGame.participantsList[4].ownCardList)
-            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList)
+            val adapters : MutableList<CardListAdapter> = mutableListOf()
+            for (i in 0 until luckyGame.participantsCnt){
+                adapters.add(CardListAdapter(luckyGame.participantsList[i].ownCardList,i, this@MainActivity))
+            }
+            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList,-1,this@MainActivity)
 
-            binding.aCardListView.adapter = aAdapter
-            binding.aCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.bCardListView.adapter = bAdapter
-            binding.bCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.cCardListView.adapter = cAdapter
-            binding.cCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.dCardListView.adapter = dAdapter
-            binding.dCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-            binding.eCardListView.adapter = eAdapter
-            binding.eCardListView.layoutManager =
-                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
+            for((view,adapter) in views.zip(adapters)){
+                view.adapter = adapter
+                view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            }
             binding.bottomCardListView.adapter = bottomAdapter
             binding.bottomCardListView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         }
+
+    }
+
+    override fun onFlipCard(card: Card, position: Int, userId: Int): Boolean {
+
+        if(turn[userId] == 0) return false
+        if(luckyGame.flipCard(userId,position)){
+            turn[userId] = turn[userId]!! - 1
+            return true
+        }
+        return false
     }
 }

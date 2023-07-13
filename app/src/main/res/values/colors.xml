@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="base_color">#FFD8D6D6</color>
     <color name="turn_color">#FFF8ABAB</color>
+    <color name="user_text_color">#80737070</color>
 </resources>

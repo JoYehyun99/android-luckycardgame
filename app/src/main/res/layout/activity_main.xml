@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="3명" />
+            android:text="@string/option1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/people4_Btn"
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="4명" />
+            android:text="@string/option2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/people5_Btn"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="5명" />
+            android:text="@string/option3" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +60,7 @@
             android:id="@+id/card_A"
             android:layout_width="0dp"
             android:layout_height="90dp"
-            app:cardBackgroundColor="#D8D6D6"
+            app:cardBackgroundColor="@color/base_color"
             app:cardCornerRadius="10dp"
             app:contentPadding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="95dp"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#D8D6D6"
+            app:cardBackgroundColor="@color/base_color"
             app:cardCornerRadius="10dp"
             app:contentPadding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +100,7 @@
             android:layout_width="0dp"
             android:layout_height="95dp"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#D8D6D6"
+            app:cardBackgroundColor="@color/base_color"
             app:cardCornerRadius="10dp"
             app:contentPadding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +120,7 @@
             android:layout_width="0dp"
             android:layout_height="95dp"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#D8D6D6"
+            app:cardBackgroundColor="@color/base_color"
             app:cardCornerRadius="10dp"
             app:contentPadding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +143,7 @@
             android:layout_width="0dp"
             android:layout_height="95dp"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#D8D6D6"
+            app:cardBackgroundColor="@color/base_color"
             app:cardCornerRadius="10dp"
             app:contentPadding="4dp"
             app:layout_constraintEnd_toEndOf="parent"

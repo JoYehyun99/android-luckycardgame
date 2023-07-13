@@ -45,7 +45,7 @@ class ResultActivity : AppCompatActivity() {
             if (winnerList.isEmpty()) {
                 binding.tvResultContent.text = "이번 게임에는 승자가 없습니다"
             } else {
-                val winnerUserList = winnerList.values.toList()
+                val winnerUserList = winnerList.values.toList().sorted()
                 val winnerText = getWinnerText(winnerUserList)
                 binding.tvResultContent.text = "이번 게임은 ${winnerText}가 승리했습니다"
 

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -52,14 +51,12 @@ class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
                         binding.people4Btn.icon = null
                         binding.people5Btn.icon = null
                     }
-
                     R.id.people4_Btn -> {
                         binding.people3Btn.icon = null
                         binding.people4Btn.icon =
                             AppCompatResources.getDrawable(applicationContext, R.drawable.checkicon)
                         binding.people5Btn.icon = null
                     }
-
                     R.id.people5_Btn -> {
                         binding.people3Btn.icon = null
                         binding.people4Btn.icon = null
@@ -124,7 +121,7 @@ class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
                     )
                 )
             }
-            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList, -1, this@MainActivity)
+            bottomAdapter = CardListAdapter(luckyGame.bottomCardList, -1, this@MainActivity)
 
             for ((view, adapter) in views.zip(adapters)) {
                 view.adapter = adapter
@@ -161,7 +158,7 @@ class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
                     )
                 )
             }
-            val bottomAdapter = CardListAdapter(luckyGame.bottomCardList, -1, this@MainActivity)
+            bottomAdapter = CardListAdapter(luckyGame.bottomCardList, -1, this@MainActivity)
 
             for ((view, adapter) in views.zip(adapters)) {
                 view.adapter = adapter
@@ -187,48 +184,41 @@ class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
         if (luckyGame.nowturn == (luckyGame.participantsCnt - 1)) { // 마지막 턴이였을 경우, 게임 종료 조건 확인
             Handler(Looper.getMainLooper()).postDelayed({
                 if(luckyGame.isGameEnd()){
-                    Toast.makeText(this, "게임 종료", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this,ResultActivity::class.java)
                     intent.putExtra(ResultActivity.WINNER,luckyGame.winnerList)
                     startActivity(intent)
                 }
                 else{
-                    //bottomAdapter.notifyDataSetChanged()
-                    cardViews[luckyGame.switchTurn()].setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.base_color
-                        )
-                    )
-                    cardViews[luckyGame.nowturn].setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.turn_color
-                        )
-                    )
+                    if(luckyGame.flippedBottomCardList.isNotEmpty()){
+                        luckyGame.flippedBottomCardList.clear()
+                        bottomAdapter.notifyDataSetChanged()
+                    }
+                    setTurnBackground()
                     flipCnt[userId] = 3
                 }
             },700)
         } else {
-            cardViews[luckyGame.switchTurn()].setCardBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.base_color
-                )
-            )
-            cardViews[luckyGame.nowturn].setCardBackgroundColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.turn_color
-                )
-            )
+            setTurnBackground()
             flipCnt[userId] = 3
         }
     }
 
-    override fun onFlipCard(card: Card, position: Int, userId: Int): Boolean {
+    private fun setTurnBackground(){
+        cardViews[luckyGame.switchTurn()].setCardBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                R.color.base_color
+            )
+        )
+        cardViews[luckyGame.nowturn].setCardBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                R.color.turn_color
+            )
+        )
+    }
 
-        //Toast.makeText(this, "${userId}번째 줄 / ${position}번째 카드 / 카드 넘버 ${card.cardNum}", Toast.LENGTH_SHORT).show()
+    override fun onFlipCard(card: Card, position: Int, userId: Int): Boolean {
         if(userId != -1 && luckyGame.nowturn != userId) return false
         if(flipCnt[luckyGame.nowturn] == 1 && luckyGame.flipCard(userId, position)){ // 한 turn의 마지막 유저가 뒤집었을 때
             switchTurn(luckyGame.nowturn)
@@ -240,4 +230,5 @@ class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
         }
         return false
     }
+
 }

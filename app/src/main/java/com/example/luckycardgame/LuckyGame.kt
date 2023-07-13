@@ -21,7 +21,7 @@ class LuckyGame {
     init {
         for (i in 1..12) {
             totalCardList.add(Card.Dog(i))
-            totalCardList.add(Card.Cow(i))
+            totalCardList.add(Card.Cat(i))
             totalCardList.add(Card.Cow(i))
             if(i != 12){
                 totalCardListForThree.add(Card.Dog(i))
@@ -259,7 +259,6 @@ class LuckyGame {
                 card.flipped = true
             }
         }
-        flippedBottomCardList.clear()
         return checkAllCardsFlipped()
     }
 

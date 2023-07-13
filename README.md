@@ -1,13 +1,23 @@
 # android-luckycardgame
-Card Class 구현 ( LuckyCard.kt )
-- enum class 사용하여 유니코드 저장
-- sealed class 인 Card를 통해 3개의 자식 클래스 생성 ( Card )
-- 결과 콘솔창
-  
-  <img width="597" alt="screenshot2" src="https://github.com/JoYehyun99/android-luckycardgame/assets/81362348/97292c5f-bf55-49da-807c-7f0651d5651a">
+#### 참가자 클래스 ( Participant )
+- 참가자 별 소유하는 카드 리스트 저장
+
+#### RecyclerView를 사용하여 카드 리스트 UI 구현
+
+- **카드 앞면 / 뒷면 구분**
+
+Adapter에 뒷면을 표시할 것인가에 대한 Boolean 값(isBackSide)을 전달하여 자신의 카드 외에는 카드 뒷면이 보일 수 있도록 설정
+
+- **카드 간격 설정**
+
+RecyclerView의 ItemDecoration 활용하여 카드 간의 간격 설정. 
+
+참가자 카드와 바닥 카드 리스트 UI가 다르기 때문에 두 개의 Decoration class 생성하여 사용. (MarginSetDecoration / MarginSetBottomDecoration) 
+
+Decoration class 내에서 카드 리스트 개수에 따라 간격을 다르게 하도록 설정
 
 
----
-
-##### 수정 사항
-- enum class를 없애고, Card class 내의 각각 동물들 data class 안에 unicode 정보를 String 형태로 저장 => _조금 더 심플한 출력 코드를 위함_
+#### 구현 화면
+<img width="322" alt="1" src="https://github.com/JoYehyun99/android-luckycardgame/assets/81362348/c0a87ff9-ec58-4cb0-be54-baa36cf03152">
+<img width="308" alt="2" src="https://github.com/JoYehyun99/android-luckycardgame/assets/81362348/645fd117-bd45-4f2b-8b77-45bb6e6c308d">
+<img width="312" alt="3" src="https://github.com/JoYehyun99/android-luckycardgame/assets/81362348/71e4999c-3e77-4257-8ecd-f819c2d67e44">

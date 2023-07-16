@@ -7,7 +7,6 @@ class LuckyGame {
     companion object{
         const val GOAL_NUM = 7
     }
-
     var participantsCnt = 3
     var participantCardCnt = 8
     var participantsList: MutableList<Participant> = mutableListOf()
@@ -19,19 +18,11 @@ class LuckyGame {
     init {
         for (i in 1..12) {
             totalCardList.add(Card.Dog(i))
-            if (i != 12) {
-                totalCardListForThree.add(Card.Dog(i))
-            }
-        }
-        for (i in 1..12) {
             totalCardList.add(Card.Cat(i))
-            if (i != 12) {
-                totalCardListForThree.add(Card.Cat(i))
-            }
-        }
-        for (i in 1..12) {
             totalCardList.add(Card.Cow(i))
-            if (i != 12) {
+            if(i != 12){
+                totalCardListForThree.add(Card.Dog(i))
+                totalCardListForThree.add(Card.Cat(i))
                 totalCardListForThree.add(Card.Cow(i))
             }
         }
@@ -46,8 +37,6 @@ class LuckyGame {
         } else {
             shareCardToFourOrFivePP(num)
         }
-
-        // 각각 오름차순 정렬로 초기화
         for (i in 0 until participantsCnt) {
             sortCardByNum(i)
         }
@@ -110,7 +99,6 @@ class LuckyGame {
         participantsList.forEach { participant ->
             val cardCnt = participant.ownCardList.groupingBy { it.cardNum }.eachCount()
             val sameThreeCards = cardCnt.filter { it.value == 3 }.keys.toList()
-
             if (sameThreeCards.isNotEmpty()) {
                 sameThreeCards.forEach { cardNum ->
                     result[cardNum] = participant
@@ -127,7 +115,6 @@ class LuckyGame {
     ): Int {
         val firstUser = participantsList[firstUserId]
         val secondUser = participantsList[secondUserId]
-
         val firstUserMinCardNum =
             firstUser.ownCardList.minWith(Comparator.comparingInt { it.cardNum }).cardNum
         val secondUserMinCardNum =
@@ -135,12 +122,11 @@ class LuckyGame {
         if (firstUserMinCardNum == secondUserMinCardNum) {
             if (bottomCardNum == firstUserMinCardNum) return bottomCardNum
         }
-
+        
         val firstUserMaxCardNum =
             firstUser.ownCardList.maxWith(Comparator.comparingInt { it.cardNum }).cardNum
         val secondUserMaxCardNum =
             secondUser.ownCardList.maxWith(Comparator.comparingInt { it.cardNum }).cardNum
-
         if (firstUserMaxCardNum == secondUserMaxCardNum) {
             if (bottomCardNum == firstUserMaxCardNum) return bottomCardNum
         }
@@ -226,7 +212,4 @@ class LuckyGame {
         }
         return checkAllCardsFlipped()
     }
-
-
-
 }

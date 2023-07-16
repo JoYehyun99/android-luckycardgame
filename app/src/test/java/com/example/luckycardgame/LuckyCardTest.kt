@@ -7,13 +7,13 @@ import org.junit.Before
 class LuckyCardTest {
 
     private lateinit var luckyGame: LuckyGame
-
+  
     @Before
     fun setupLuckyGame() {
         luckyGame = LuckyGame()
         luckyGame.setParticipantsNumbers(3) // 게임 인원을 3명으로 임의로 설정
     }
-
+    
     @Test
     fun initialSetting_countAnimalCards_eachHas12Cards() {
         val groupByAnimal = luckyGame.totalCardList.groupBy { card ->
@@ -87,7 +87,7 @@ class LuckyCardTest {
             assertTrue(tmp.size % 3 == 0)
         }
     }
-
+    
     @Test
     fun compareThreeCards_twoParticipantsAndBottom_isTrue() {
 
@@ -105,13 +105,12 @@ class LuckyCardTest {
             assertFalse(luckyGame.participantsList[user2].ownCardList.all { card -> card.cardNum == bottomCardNum })
         }
     }
-
+    
     @Test
     fun flipCard_BothEndsCard_returnTrue() {
         val user = 1
         val left = 0
         val right = luckyGame.participantCardCnt - 1
-
         assertTrue(luckyGame.flipCard(user, left))
         assertTrue(luckyGame.flipCard(user, right))
     }
@@ -120,7 +119,6 @@ class LuckyCardTest {
     fun flipCard_middleCards_returnFalse() {
         val user = 1
         val position = 2
-
         assertFalse(luckyGame.flipCard(user, position))
     }
 
@@ -155,7 +153,6 @@ class LuckyCardTest {
         val expected = listOf(listOf(1,2), listOf(1,6), listOf(2,6))
         luckyGame.combination(actual, test, cnt, 0, Array(test.size) { false })
         print(actual.toString())
-
         assertEquals(expected,actual)
     }
 
@@ -163,7 +160,6 @@ class LuckyCardTest {
     fun combination_checkSumOrDiff_returnTrueIfSeven(){
         val test = listOf(listOf(1,2,4), listOf(1,2,6), listOf(2,6,8))
         val expected = listOf(1,2,4)
-
         assertEquals(expected,luckyGame.checkCombinationForSumOrDiffSeven(test))
     }
 
@@ -171,7 +167,4 @@ class LuckyCardTest {
     fun isGameEnd_checkGameStatus(){
         assertFalse(luckyGame.isGameEnd())
     }
-
-
-
 }

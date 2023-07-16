@@ -42,13 +42,11 @@ class CardListAdapter(private val cardList: MutableList<Card>) :
                     holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = cardItem.unicode
                 }
-
                 is Card.Cat -> {
                     holder.topNum.text = (cardItem as Card.Cat).cardNum.toString()
                     holder.bottomNum.text = cardItem.cardNum.toString()
                     holder.animalImg.text = cardItem.unicode
                 }
-
                 is Card.Cow -> {
                     holder.topNum.text = (cardItem as Card.Cow).cardNum.toString()
                     holder.bottomNum.text = cardItem.cardNum.toString()

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.luckycardgame.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity(), CardListAdapter.OnCardClickListener {
 
     private val luckyGame = LuckyGame()
